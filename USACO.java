@@ -58,7 +58,6 @@ public class USACO {
 
   }
 
-
   public static void poundDirt(int[][] map, int[] moves) {
     int largest = 0;
     for (int i = moves[0]; i < moves[0]+3 && i < map.length ; i++) {
@@ -77,9 +76,41 @@ public class USACO {
       }
     }
   }
+
+  public static int silver(String filename) throws FileNotFoundException{
+      File file = new File(filename);
+      Scanner scanner = new Scanner(file);
+      int rows = scanner.nextInt();
+      int cols = scanner.nextInt();
+      int time = scanner.nextInt();
+      System.out.println(""+ rows + cols + time);
+      scanner.nextLine();
+      int[][] map = new int[rows][cols];
+      for (int i = 0; i < rows; i++) {
+        String line = scanner.nextLine();
+        System.out.println(line);
+        for (int j = 0; j < cols; j++) {
+          if (line.charAt(j) == '*') {
+            map[i][j] = -1;
+          }
+          if (line.charAt(j) == '.') {
+            map[i][j] = 0;
+          }
+          System.out.print(""+map[i][j]);
+        }
+        System.out.println("");
+      }
+      int startX = scanner.nextInt();
+      int startY = scanner.nextInt();
+      int endX = scanner.nextInt();
+      int endY = scanner.nextInt();
+      System.out.println("" + startX + startY + endX + endY);
+      return 0;
+  }
+
   public static void main(String[] args) {
     try {
-      System.out.println(bronze("test.txt"));
+      System.out.println(silver("test.txt"));
     }
     catch (FileNotFoundException e) {
       System.out.println("haha");
