@@ -78,17 +78,18 @@ public class USACO {
   }
 
   public static int silver(String filename) throws FileNotFoundException{
+      int[] moves = new int[] {1, 0, 0, 1, -1, 0, 0, -1};
       File file = new File(filename);
       Scanner scanner = new Scanner(file);
       int rows = scanner.nextInt();
       int cols = scanner.nextInt();
       int time = scanner.nextInt();
-      System.out.println(""+ rows + cols + time);
+      //System.out.println(""+ rows + cols + time);
       scanner.nextLine();
       int[][] map = new int[rows][cols];
       for (int i = 0; i < rows; i++) {
         String line = scanner.nextLine();
-        System.out.println(line);
+        //System.out.println(line);
         for (int j = 0; j < cols; j++) {
           if (line.charAt(j) == '*') {
             map[i][j] = -1;
@@ -96,21 +97,35 @@ public class USACO {
           if (line.charAt(j) == '.') {
             map[i][j] = 0;
           }
-          System.out.print(""+map[i][j]);
+          //System.out.print(""+map[i][j]);
+        }
+        //System.out.println("");
+      }
+      int startR = scanner.nextInt()-1;
+      int startC = scanner.nextInt()-1;
+      int endR = scanner.nextInt()-1;
+      int endC = scanner.nextInt()-1;
+      //System.out.println("" + startR + startC + endR + endC);
+      for (int i = 0; i < moves.length; i+=2) {
+        try {
+          if (map[startR + moves[i]][startC + moves[i+1]] != -1) {
+            map[startR + moves[i]][startC + moves[i+1]] += 1;
+          }
+        }
+        catch(Exception e) {}
+      }
+      /*for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+          System.out.print(map[i][j]);
         }
         System.out.println("");
-      }
-      int startX = scanner.nextInt();
-      int startY = scanner.nextInt();
-      int endX = scanner.nextInt();
-      int endY = scanner.nextInt();
-      System.out.println("" + startX + startY + endX + endY);
+      }*/
       return 0;
   }
 
   public static void main(String[] args) {
     try {
-      System.out.println(silver("test.txt"));
+      silver("test.txt");
     }
     catch (FileNotFoundException e) {
       System.out.println("haha");
