@@ -149,13 +149,23 @@ public class USACO {
               go = true;
             }
           }
+          if (cols % 2 == 0) {
+            if (go) {
+              go = false;
+            }
+            else{
+              go = true;
+            }
+          }
         }
         time--;
-        if (go) {
-          go = false;
-        }
-        else{
-          go = true;
+        if (!(rows % 2 == 1 && cols % 2 == 0)) {
+          if (go) {
+            go = false;
+          }
+          else{
+            go = true;
+          }
         }
         /*System.out.println(" ");
         for (int i = 0; i < rows; i++) {
