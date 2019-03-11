@@ -117,34 +117,60 @@ public class USACO {
       time--;
       /*for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
-          System.out.print(map[i][j]);
+          System.out.print(map[i][j] + ",");
         }
         System.out.println("");
       }*/
+      boolean go;
+      if (startR + startC % 2 == 0) {
+        go = false;
+      }
+      else {
+        go = true;
+      }
       while (time > 0) {
         for (int r = 0; r < rows; r++) {
           for (int c = 0; c < cols; c++) {
-            if (map[r][c] > 0) {
-              for (int i = 0; i < moves.length; i+=2) {
-                try {
-                  if (map[r + moves[i]][c + moves[i+1]] != -1) {
-                    map[r + moves[i]][c + moves[i+1]] += map[r][c];
+            if (go) {
+              if (map[r][c] > 0) {
+                for (int i = 0; i < moves.length; i+=2) {
+                  try{
+                    if (map[r + moves[i]][c + moves[i+1]] != -1) {
+                      map[r + moves[i]][c + moves[i+1]] += map[r][c];
+                    }
                   }
+                  catch(Exception e) {}
                 }
-                catch(Exception e) {}
+                map[r][c] = 0;
               }
-              map[r][c] = 0;
+              go = false;
+            }
+            else {
+              go = true;
             }
           }
         }
         time--;
+        if (go) {
+          go = false;
+        }
+        else{
+          go = true;
+        }
+        /*System.out.println(" ");
+        for (int i = 0; i < rows; i++) {
+          for (int j = 0; j < cols; j++) {
+            System.out.print(map[i][j] + ",");
+          }
+          System.out.println("");
+        }*/
       }
-      return 0;
+      return map[endR][endC];
   }
 
   public static void main(String[] args) {
     try {
-      silver("test.txt");
+      System.out.println(silver("test.txt"));
     }
     catch (FileNotFoundException e) {
       System.out.println("haha");
